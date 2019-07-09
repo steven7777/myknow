@@ -1,0 +1,44 @@
+<h1>Compare Results</h1>
+
+
+<ul>
+  {% for entity in entities %}
+    <li>
+      {{ entity.name }}, {{ entity.is_a }}
+    </li>
+  {% endfor %}
+</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">Comparison table</th>
+        </tr>
+    </thead>
+    <tbody>
+
+		<tr>
+				<td></td> <td><b>{{entities.0}}</b></td> <td><b> VS </b></td> <td><b>{{entities.1}}</b></td>
+        </tr>
+  	{%for c in comp%}
+        <tr>
+				<td><b>{{c.0}}</b></td> <td>{{c.1}}</td> <td>is {{c.2}} x </td> <td>{{c.3}}</td>
+        </tr>
+	<!--
+        <tr>
+				<td><b>Speed</b></td> <td>{{entities.0.speed}}</td> <td> < </td> <td>{{entities.1.speed}}</td>
+        </tr>
+        <tr>
+				<td><b>Rotation speed</b></td> <td>{{entities.0.speed_rotation}}</td> <td> < </td> <td>{{entities.1.speed_rotation}}</td>
+        </tr>
+        <tr>
+				<td><b>Radius</b></td> <td>{{entities.0.radius}}</td> <td> < </td> <td>{{entities.1.radius}}</td>
+        </tr>
+        <tr>
+				<td><b>Perimeter</b></td> <td>{{entities.0.perimeter}}</td> <td> < </td> <td>{{entities.1.perimeter}}</td>
+        </tr>
+	-->
+  	{%endfor%}
+
+    </tbody>
+</table>

@@ -1,0 +1,9 @@
+<h1>Search Results</h1>
+
+<ul>
+  {% for entity in object_list %}
+    <li>
+      {{ entity.name }}, {{ entity.is_a }}
+    </li>
+  {% endfor %}
+</ul>

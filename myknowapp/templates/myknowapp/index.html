@@ -1,0 +1,58 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'myknowapp/style.css' %}">
+
+<i><a href="http://localhost:8000/admin/myknowapp/entity">(=> GO TO ADMIN SITE)</a></i>
+
+<u><h1>ENTITIES</h1></u>
+
+<u><h2>SEARCH:</h2></u>
+    <ul>
+        <li><a href="{%url 'myknowapp:search' %}">SEARCH</a></li>
+        <li><a href="{%url 'myknowapp:compare' %}">COMPARE</a></li>
+    </ul>
+
+
+<u><h2>INTERESTING ENTITIES:</h2></u>
+
+<p>- Compositions :
+    <ul>
+        <li><a href="{%url 'myknowapp:detail' e_car.id%}">{{ e_car.name }}</a></li>
+        <li><a href="{%url 'myknowapp:detail' e_hb.id%}">{{ e_hb.name }}</a></li>
+        <li><a href="{%url 'myknowapp:detail' e_sts.id%}">{{ e_sts.name }}</a></li>
+        <li><a href="{%url 'myknowapp:detail' e_sos.id%}">{{ e_sos.name }}</a></li>
+        <li><a href="{%url 'myknowapp:detail' e_fe.id%}">{{ e_fe.name }}</a></li>
+    </ul>
+
+<p>- Links :
+    <ul>
+        <li><a href="{%url 'myknowapp:detail' e_sun.id%}">{{ e_sun.name }}</a></li>
+        <li><a href="{%url 'myknowapp:detail' e_earth.id%}">{{ e_earth.name }}</a></li>
+        <li><a href="{%url 'myknowapp:detail' e_mars.id%}">{{ e_mars.name }}</a></li>
+    </ul>
+
+<p>- Implications (& synonyms, oppposite...):
+    <ul>
+        <li><a href="{%url 'myknowapp:detail' e_love.id%}">{{ e_love.name }}</a></li>
+        <li><a href="{%url 'myknowapp:detail' e_fear.id%}">{{ e_fear.name }}</a></li>
+    </ul>
+
+
+<u><h2>- ALL ENTITIES:</h2></u>
+{% if latest_entity_list %}
+    <ul>
+    {% for entity in latest_entity_list|dictsort:"name"  %}
+		<!-- URL harcoded
+        <li><a href="/myknowapp/{{ entity.id }}/">{{ entity.name }}</a></li>
+		-->
+		<!-- URL NOT harcoded: use url name -->
+        <li><a href="{%url 'myknowapp:detail' entity.id%}">{{ entity.name }}</a></li>
+    {% endfor %}
+    </ul>
+
+	
+
+{% else %}
+    <p>No entity is available.</p>
+{% endif %}
+

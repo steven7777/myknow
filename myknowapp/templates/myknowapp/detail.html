@@ -1,0 +1,99 @@
+<!--
+Au minimum :
+{{entity}}
+-->
+<h1>{{ entity.name }}</h1>
+
+<h2>- Opposite:</h2>
+{% if entity.opposite %}
+<ul>
+	<li><a href="{%url 'myknowapp:detail' entity.opposite.id%}">{{ entity.opposite.name }}</a></li>
+</ul>
+{% endif %}
+
+<h2>- Is a (class):</h2>
+{% if entity.is_a %}
+<ul>
+	<li><a href="{%url 'myknowapp:detail' entity.is_a.id%}">{{ entity.is_a.name }}</a></li>
+</ul>
+{% endif %}
+
+<h2>- Subclasses:</h2>
+<ul>
+<!--
+for subclass in entity.is_a_set.all
+-->
+{% for subclass in entity.subclasses.all %}
+	<li><a href="{%url 'myknowapp:detail' subclass.id%}">{{ subclass.name }}</a>
+{% endfor %}
+</ul>
+
+<h2>- Links (strong "named" relationship):</h2>
+<ul>
+
+	<!--
+	<li>is related to 1 : 
+	-->
+	{% if entity.linked_to %}
+	<li>{{entity.linked_to_direct_name}} : 
+	<a href="{%url 'myknowapp:detail' entity.linked_to.id%}">{{ entity.linked_to.name }}</a>
+	</li>
+	{% endif %}
+
+	{% if entity.linked.all.exists %}
+	<!--
+	<li>is related to N :</li>
+	-->
+	<li>{{entity.linked.all.first.linked_to_reverse_name}} : </li>
+	<ul>
+	{% for linked in entity.linked.all %}
+	<li><a href="{%url 'myknowapp:detail' linked.id%}">{{ linked.name }}</a></li>
+	{% endfor %}
+	</ul>
+	{% endif %}
+</ul>
+
+<h2>- Synonyms:</h2>
+<ul>
+{% for synonym in entity.synonyms.all %}
+	<li><a href="{%url 'myknowapp:detail' synonym.id%}">{{ synonym }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>- Implication (consequence):</h2>
+{% if entity.implies %}
+<ul>
+	<li><a href="{%url 'myknowapp:detail' entity.implies.id%}">{{ implication }}</a></li>
+</ul>
+{% endif %}
+
+<h2>- Components:</h2>
+<ul>
+
+{% comment "Component without quantity" %}
+{% for component in entity.components.all %}
+{% endcomment %}
+
+{% comment "Component with quantity" %}
+- Component only:
+{% for component in entity.has_components.all %}
+    <li>{{ component.name }}</li>
+{% endfor %}
+- Component with qty :
+{% endcomment %}
+
+{% for component in entity.components.all %}
+	<!--
+    <li>{{ component.qty }} {{ component.component }}</li>
+	-->
+	<li>{{ component.qty }} <a href="{%url 'myknowapp:detail' component.component.id%}">{{ component.component }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>- Compounds:</h2>
+{% for compound in entity.compounds.all %}
+<ul>
+	<li><a href="{%url 'myknowapp:detail' compound.compound.id%}">{{ compound.compound }}</a></li>
+</ul>
+{% endfor %}
+<ul>

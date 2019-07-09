@@ -1,0 +1,10 @@
+<p>Entities containing '{{query_string}}'</p> 
+{% for entity in entities %}
+    <div>
+        <span> {{ entity.date_created }} </span>
+        <a href="{% url 'detail' slug=entity.slug %}"><h2 class="page-title">{{ entity.name }}</h2></a>
+        <div class="post">
+            {{ entity.body|safe }}
+        </div>
+    </div>
+{% endfor %}
