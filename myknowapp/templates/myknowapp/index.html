@@ -1,6 +1,9 @@
-{% load static %}
+{% extends 'myknowapp/base.html' %}
 
+{% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'myknowapp/style.css' %}">
+
+{% block content %}
 
 <i><a href="http://localhost:8000/admin/myknowapp/entity">(=> GO TO ADMIN SITE)</a></i>
 
@@ -56,3 +59,5 @@
     <p>No entity is available.</p>
 {% endif %}
 
+
+{% endblock %}

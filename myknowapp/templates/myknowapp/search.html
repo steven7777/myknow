@@ -1,3 +1,7 @@
+{% extends 'myknowapp/base.html' %}
+
+{% block content %}
+
 <h1>HomePage</h1>
 <form action="{% url 'myknowapp:search_results' %}" method="get">
   <input name="q" type="text" placeholder="Search...">
@@ -7,3 +11,5 @@
   <input name="name2" type="text" placeholder="Search...">
   -->
 </form>
+
+{% endblock %}
