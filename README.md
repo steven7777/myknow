@@ -9,9 +9,9 @@ It is based on the python framework Django v2.
 
 This is a first very alpha version, work in progress.
 
-Version : 0.1
+Version : 0.1 (project started July 2019)
 
-Author : Etienne Pallier (since July 2019)
+Author : Etienne Pallier 
 
 ---
 
