@@ -11,7 +11,7 @@ This is a first very alpha version, work in progress.
 
 Version : 0.1
 
-Author : Etienne Pallier (2019)
+Author : Etienne Pallier (since July 2019)
 
 ---
 
