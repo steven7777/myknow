@@ -23,6 +23,7 @@ $ source ./venv_myknow/bin/activate
 (venv_myknow) $ ./manage.py createsuperuser
 
 
+
 II - RUN
 
 (venv_myknow should be activated, see above)
