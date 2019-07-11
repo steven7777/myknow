@@ -86,7 +86,7 @@ class EntityDetailViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, e.name)
         self.assertContains(response, 'toto')
-        self.assertContains(response, '- Opposite:')
+        self.assertContains(response, 'Opposite:')
         self.assertContains(response, 'e opposite')
 
 
