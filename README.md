@@ -3,6 +3,7 @@
 
 MyKnow is a personal knowledge management web application,
 allowing you to enter and describe any "entity" you know about and its relationships with other entities.
+Then, you can compare these entities with each other, myknow being able to compare any entities which have common attributes.
 
 It is based on the python framework Django v2.
 
