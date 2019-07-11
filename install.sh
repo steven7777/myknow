@@ -10,6 +10,7 @@ echo
 ## 1) Install dependencies (Django)
 echo
 echo "Installing dependencies (django)..."
+pip install --upgrade pip
 pip install -r ./requirements.txt 
 echo "done"
 
@@ -24,4 +25,10 @@ echo "done"
 echo
 echo "Creating an admin user (you)..."
 ./manage.py createsuperuser
+
+## 4) Run the tests
+echo
+echo "Running the tests..."
+./manage.py test myknowapp  
+echo "done"
 
