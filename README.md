@@ -13,32 +13,42 @@ Version : 0.1 (project started July 2019)
 
 Author : Etienne Pallier 
 
----
 
+---
 # INSTALL
 
-## 1) Create a venv and activate it
+## 1) Get this app
 
-$ python3 -m venv venv_myknow  
-$ source ./venv_myknow/bin/activate
+	 $ git clone https://github.com/steven7777/myknow.git myknow
+	 $ cd myknow/
 
-## 2) Install dependencies (Django)
+## 2) Create a venv and activate it
 
-(venv_myknow) $ pip install -r requirements.txt 
+	$ python3 -m venv venv_myknow  
+	$ source ./venv_myknow/bin/activate
 
-## 3) Create the database
+## 3) Run the install script (from your activated venv)
 
-(venv_myknow) $ ./manage.py makemigrations  
-(venv_myknow) $ ./manage.py migrate
+	(venv_myknow) $ ./install.py
+ 
 
-## 4) Create an admin user
 
-(venv_myknow) $ ./manage.py createsuperuser
+---
+# UPDATE
+
+This is to be done from time to time to be sure that you are running the very last version of this app
+
+## 1) Activate your venv
+
+	$ source ./venv_myknow/bin/activate
+
+## 2) Run the update script (from your activated venv)
+
+	(venv_myknow) $ ./update.py
 
 
 
 -------------
-
 # TEST
 
 (venv_myknow should be activated, see above)
@@ -137,7 +147,6 @@ $ source ./venv_myknow/bin/activate
 
 
 -------------
-
 # RUN
 
 (venv_myknow should be activated, see above)
