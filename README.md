@@ -41,6 +41,15 @@ $ source ./venv_myknow/bin/activate
 
 -------------
 
+# TEST
+
+(venv_myknow should be activated, see above)
+
+(venv_myknow) $ ./manage.py test myknowapp
+
+
+-------------
+
 # RUN
 
 (venv_myknow should be activated, see above)
