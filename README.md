@@ -1,6 +1,20 @@
 
+# INTRO
 
-# I - INSTALL
+MyKnow is a personal knowledge management web application,
+allowing you to enter and describe any "entity" you know about and its relationships with other entities.
+
+It is based on the python framework Django v2.
+
+This is a first very alpha version, work in progress.
+
+Version : 0.1
+
+Author : Etienne Pallier (2019)
+
+---
+
+# INSTALL
 
 ## 1) Create a venv and activate it
 
@@ -26,7 +40,7 @@ $ source ./venv_myknow/bin/activate
 
 -------------
 
-# II - RUN
+# RUN
 
 (venv_myknow should be activated, see above)
 
@@ -44,5 +58,5 @@ You can also go directly there:
 
 Connect to http://localhost:8000/admin
 
-Login as the admin user (created at step I-4 above)
+Login as the admin user (created at step 4 above)
 
