@@ -7,72 +7,109 @@
 Au minimum :
 {{entity}}
 -->
-<h1>{{ entity.name }}</h1>
+<h1><u>{{ entity.name }}</u></h1>
 
-<h2>- Opposite:</h2>
+
+
+
+<ul>
+
+
+<li><b>Opposite: </b>
 {% if entity.opposite %}
-<ul>
-	<li><a href="{%url 'myknowapp:detail' entity.opposite.id%}">{{ entity.opposite.name }}</a></li>
-</ul>
+	<a href="{%url 'myknowapp:detail' entity.opposite.id%}">{{ entity.opposite.name }}</a>
 {% endif %}
+</li>
 
-<h2>- Is a (class):</h2>
+
+<li><b>Implication (consequence):</b>
+{% if entity.implies %}
+	<a href="{%url 'myknowapp:detail' entity.implies.id%}">{{ implication }}</a>
+{% endif %}
+</li>
+
+
+<li><b>Is a (class):</b>
 {% if entity.is_a %}
-<ul>
-	<li><a href="{%url 'myknowapp:detail' entity.is_a.id%}">{{ entity.is_a.name }}</a></li>
-</ul>
+	<a href="{%url 'myknowapp:detail' entity.is_a.id%}">{{ entity.is_a.name }}</a>
 {% endif %}
+</li>
 
-<h2>- Subclasses:</h2>
+
+<li><b>Subclasses:</b>
 <ul>
 <!--
 for subclass in entity.is_a_set.all
 -->
 {% for subclass in entity.subclasses.all %}
 	<li><a href="{%url 'myknowapp:detail' subclass.id%}">{{ subclass.name }}</a>
+	
+	<ul>
+	{% for subclass2 in subclass.subclasses.all %}
+		<li><a href="{%url 'myknowapp:detail' subclass2.id%}">{{ subclass2.name }}</a>
+	{% endfor %}
+	</ul>
+
 {% endfor %}
 </ul>
+</li>
 
-<h2>- Links (strong "named" relationship):</h2>
+
+<li><b>Links (strong "named" relationship):</b>
 <ul>
 
 	<!--
 	<li>is related to 1 : 
 	-->
 	{% if entity.linked_to %}
-	<li>{{entity.linked_to_direct_name}} : 
-	<a href="{%url 'myknowapp:detail' entity.linked_to.id%}">{{ entity.linked_to.name }}</a>
+	<li>
+		{{entity.linked_to_direct_name}} : <a href="{%url 'myknowapp:detail' entity.linked_to.id%}">{{ entity.linked_to.name }}</a>
+		
+		{% if entity.linked_to.linked_to %}
+		<ul><li>
+			{{entity.linked_to.linked_to_direct_name}} : <a href="{%url 'myknowapp:detail' entity.linked_to.id%}">{{ entity.linked_to.linked_to.name }}</a>
+		</li></ul>
+		{% endif %}
+
 	</li>
 	{% endif %}
 
-	{% if entity.linked.all.exists %}
 	<!--
 	<li>is related to N :</li>
 	-->
+	{% if entity.linked.all.exists %}
 	<li>{{entity.linked.all.first.linked_to_reverse_name}} : </li>
-	<ul>
-	{% for linked in entity.linked.all %}
-	<li><a href="{%url 'myknowapp:detail' linked.id%}">{{ linked.name }}</a></li>
-	{% endfor %}
-	</ul>
+		<ul>
+		{% for linked in entity.linked.all %}
+			<li><a href="{%url 'myknowapp:detail' linked.id%}">{{ linked.name }}</a></li>
+			
+			{% if linked.linked.all.exists %}
+			<ul>
+			<li>{{linked.linked.all.first.linked_to_reverse_name}} : </li>
+				<ul>
+				{% for linked2 in linked.linked.all %}
+					<li><a href="{%url 'myknowapp:detail' linked2.id%}">{{ linked2.name }}</a></li>
+				{% endfor %}
+				</ul>
+			</ul>
+			{% endif %}
+			
+		{% endfor %}
+		</ul>
 	{% endif %}
+
 </ul>
 
-<h2>- Synonyms:</h2>
+
+<li><b>Synonyms:</b>
 <ul>
 {% for synonym in entity.synonyms.all %}
 	<li><a href="{%url 'myknowapp:detail' synonym.id%}">{{ synonym }}</a></li>
 {% endfor %}
 </ul>
 
-<h2>- Implication (consequence):</h2>
-{% if entity.implies %}
-<ul>
-	<li><a href="{%url 'myknowapp:detail' entity.implies.id%}">{{ implication }}</a></li>
-</ul>
-{% endif %}
 
-<h2>- Components:</h2>
+<li><b>Components:</b>
 <ul>
 
 {% comment "Component without quantity" %}
@@ -92,16 +129,35 @@ for subclass in entity.is_a_set.all
     <li>{{ component.qty }} {{ component.component }}</li>
 	-->
 	<li>{{ component.qty }} <a href="{%url 'myknowapp:detail' component.component.id%}">{{ component.component }}</a></li>
+	<ul>
+	{% for component2 in component.component.components.all %}
+		<li>{{ component2.qty }} <a href="{%url 'myknowapp:detail' component2.component.id%}">{{ component2.component }}</a></li>
+	{% endfor %}
+	</ul>
 {% endfor %}
 </ul>
 
-<h2>- Compounds:</h2>
+
+<li><b>Compounds:</b>
+<ul>
 {% for compound in entity.compounds.all %}
-<ul>
 	<li><a href="{%url 'myknowapp:detail' compound.compound.id%}">{{ compound.compound }}</a></li>
-</ul>
+
+		<ul>
+		{% for compound2 in compound.compound.compounds.all %}
+			<li><a href="{%url 'myknowapp:detail' compound2.compound.id%}">{{ compound2.compound }}</a></li>
+		{% endfor %}
+		</ul>
+
 {% endfor %}
-<ul>
+</ul>
+
+
+</ul>
+
+
+
+<b><a href="http://localhost:8000/admin/myknowapp/entity/{{ entity.id }}/change">[EDIT]</a></b>
 
 
 {% endblock %}
